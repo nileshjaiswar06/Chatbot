@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "6739c5884630a95ab1876e74"
+  },
+  "name": "tejal",
+  "email": "tp@domain.com",
+  "password": "$2b$10$4ywfEE783ziRa1ROPBzdderaCvuiT4ITOdWRzYoThXCAhGphvMBya",
+  "chats": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6739c6204630a95ab1876e7d"
+  },
+  "name": "nilesh",
+  "email": "nj@domain.com",
+  "password": "$2b$10$bYN41tyZ4mKWdS.xUfNLwepWzhBdtj/UGPVgGXG9MTuxq588EtvhC",
+  "chats": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6739c63c4630a95ab1876e82"
+  },
+  "name": "shivanshu",
+  "email": "sp@domain.com",
+  "password": "$2b$10$7E42J9oyPUcZXik8NUb/wO2sGHd1c4J3hyz6dCP8BRQ84wfEgh/Re",
+  "chats": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "673cd7634c3b7d9022884d62"
+  },
+  "name": "vaidehi",
+  "email": "vk@domain.com",
+  "password": "$2b$10$vhzzbFghSAAwz.gyqJs//Oq2NRgzSEp/jU0oiZJTxNDl6Gv2ziOuq",
+  "chats": [],
+  "__v": 0
+}]
