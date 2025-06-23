@@ -1,7 +1,6 @@
-import { Box, useMediaQuery, useTheme, Typography } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import TypingAnim from '../components/typer/TypingAnim';
 import Footer from '../components/footer/Footer';
-import { IoMdInformationCircleOutline } from 'react-icons/io';
 
 const Home = () => {
   const theme = useTheme();
@@ -27,7 +26,7 @@ const Home = () => {
             display: "flex",
             flexDirection: { md: "row", xs: "column", sm: "column" },
             gap: 5,
-            my: 10,
+            my: 5,
           }}
         >
           <img
@@ -40,60 +39,26 @@ const Home = () => {
 
         <Box
           sx={{
+            width: isBelowMd ? "85%" : "70%",
+            height: isBelowMd ? "auto" : "55%",
+            border: "1.5px solid #4a5b6a",
+            borderRadius: "16px",
+            overflow: "hidden",
+            boxShadow: "0 2px 12px rgba(74,91,106,0.15)",
+            mx: "auto",
+            mb: 0,
+            background: "rgba(17,29,39,0.85)",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "60%",
-            padding: "15px", // Reduced padding
-            borderRadius: "20px",
-            backgroundColor: "rgb(17, 29, 39)",
-            boxShadow: "0px 3px 13px rgba(255, 248, 255, 0.5)",
-            marginTop: 5, // Reduced margin-top
-            marginBottom: 5, // Reduced margin-bottom
-            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{ color: "white", fontWeight: "600", mb: 2 }}
-          >
-            Welcome to Our AI Chatbot Application!
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ color: "white", fontSize: "18px", lineHeight: "1.8" }}
-          >
-            This app is powered by cutting-edge AI technology to assist you with
-            all your queries and provide real-time, insightful responses. Enjoy
-            a seamless and interactive user experience!
-          </Typography>
-
-          {/* Note Section */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "20px",
-              backgroundColor: "rgb(23, 35, 45)",
-              padding: "10px",
-              borderRadius: "10px",
-              boxShadow: "0px 0px 15px rgba(153, 146, 146, 0.66)",
-            }}
-          >
-            <IoMdInformationCircleOutline
-              size={20}
-              color="yellow"
-              style={{ marginRight: "8px" }}
-            />
-            <Typography
-              variant="body2"
-              sx={{ color: "white", fontSize: "15px" }}
-            >
-              Note: The API key has expired, so the chatbot cannot provide
-              information at the moment. Please check back later!
-            </Typography>
-          </Box>
+          <img 
+            className='chat-page'
+            src='chat-page.png'
+            alt='chat-page'
+            style={{width: "100%", height: "100%", objectFit: "cover"}}
+          />
         </Box>
       </Box>
       <Footer />
