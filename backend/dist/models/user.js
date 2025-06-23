@@ -14,6 +14,21 @@ const chatSchema = new mongoose.Schema({
         required: true
     }
 });
+const conversationSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        default: randomUUID()
+    },
+    title: {
+        type: String,
+        default: "New Conversation"
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    },
+    chats: [chatSchema]
+});
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -28,7 +43,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    chats: [chatSchema]
+    conversations: [conversationSchema]
 });
 export default mongoose.model("User", userSchema);
 //# sourceMappingURL=user.js.map
