@@ -6,6 +6,7 @@ import Signup from "./pages/Signup"
 import Chat from "./pages/Chat"
 import NotFound from "./pages/NotFound"
 import { userAuth } from "./context/AuthContext"
+import { Divider } from "@mui/material"
 
 function App() {
 
@@ -13,6 +14,12 @@ function App() {
   return (
     <>
       <Header />
+      <Divider sx={{ 
+                borderColor: 'rgba(210, 214, 218, 0.24)', // subtle color
+                borderBottomWidth: 1.5, 
+                marginY: 1 
+            }} 
+        />
       <Routes >
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
