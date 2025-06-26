@@ -1,10 +1,13 @@
 import express from 'express';
 import { Configuration, OpenAIApi } from 'openai';
+import { config } from 'dotenv';
+
+config();
 
 const router = express.Router();
 
 const openai = new OpenAIApi(
-  new Configuration({ apiKey: process.env.OPENAI_API_SECRET })
+  new Configuration({ apiKey: process.env.OPEN_AI_SECRET })
 );
 
 router.post('/generate', async (req, res) => {
@@ -18,6 +21,7 @@ router.post('/generate', async (req, res) => {
     });
     res.json({ url: response.data.data[0].url });
   } catch (err) {
+    console.error("DALL·E error:", err); // <--- Add this line
     res.status(500).json({ error: 'Image generation failed' });
   }
 });
