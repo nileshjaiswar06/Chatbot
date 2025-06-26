@@ -11,6 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 type Message = {
   role: 'user' | 'assistant';
   content: string;
+  type?: 'text' | 'image';
 };
 
 const Chat = () => {
@@ -29,9 +30,33 @@ const Chat = () => {
     if (inputRef && inputRef.current) {
       inputRef.current.value = "";
     }
-    const newMessage: Message = { role: "user", content };
+    const newMessage: Message = { role: "user", content, type: "text" };
     setChatMessages((prev) => [...prev, newMessage]);
     
+    const isImagePrompt = /draw|show me|generate an image|picture|image/i.test(content);
+
+    if (isImagePrompt) {
+      try {
+        // Optionally, show a loading message
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: "Generating image...", type: "text" }
+        ]);
+        const imageUrl = await generateImage(content);
+        // Remove the loading message and add the image
+        setChatMessages((prev) => [
+          ...prev.slice(0, -1),
+          { role: "assistant", content: imageUrl, type: "image" }
+        ]);
+      } catch (error) {
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: "Image generation failed.", type: "text" }
+        ]);
+      }
+      return;
+    }
+
     try {
       const chatData = await sendChatRequest(content);
       const lastMessage = chatData.chats[chatData.chats.length - 1];
@@ -59,6 +84,17 @@ const Chat = () => {
       toast.error("Deleting chats failed", { id: "deletechats" });
     }
   };
+
+  const generateImage = async(prompt: string): Promise<string> => {
+    const res = await fetch('/api/v1/image/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Image generation failed');
+    return data.url;
+  }
 
   useLayoutEffect(() => {
     if (auth?.isLoggedIn && auth.user) {
@@ -257,9 +293,24 @@ const Chat = () => {
             },
           }}
         >
-          {chatMessages.map((chat, index) => (
-            <ChatItem content={chat.content} role={chat.role} key={index} />
-          ))}
+          {chatMessages.map((chat, index) =>
+            chat.type === 'image' ? (
+              <Box key={index} sx={{ display: 'flex', justifyContent: chat.role === 'user' ? 'flex-end' : 'flex-start', my: 2 }}>
+                <img
+                  src={chat.content}
+                  alt="Generated"
+                  style={{
+                    maxWidth: 300,
+                    borderRadius: 8,
+                    border: chat.role === 'user' ? '2px solid #1976d2' : '2px solid #4a5b6a',
+                    background: '#222',
+                  }}
+                />
+              </Box>
+            ) : (
+              <ChatItem content={chat.content} role={chat.role} key={index} />
+            )
+          )}
         </Box>
 
         <div

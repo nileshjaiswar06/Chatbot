@@ -45,7 +45,7 @@ export const sendChatRequest = async (message: string) => {
 };
 
 export const getUserChats = async () => {
-  const res = await axios.get("/chat/all-chats");
+  const res = await axios.get("/chat/all-chats", { headers: { 'Cache-Control': 'no-cache' } });
 
   if (res.status !== 200) {
     throw new Error("Unable to get Chat");

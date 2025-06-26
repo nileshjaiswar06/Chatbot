@@ -33,7 +33,7 @@ export const generateChatCompletion = async (req: Request, res: Response, next: 
     // Get current conversation or create new one
     let currentConversation = user.conversations?.length 
       ? user.conversations[user.conversations.length - 1] 
-      : null;
+      : { chats: [], title: "New Conversation", timestamp: new Date() };
 
     if (!currentConversation || !currentConversation.chats?.length) {
       const newConversation: IConversation = {
@@ -68,7 +68,7 @@ export const generateChatCompletion = async (req: Request, res: Response, next: 
 
     // Get completion from OpenAI
     const chatResponse = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4",
       messages: chats,
       temperature: 0.7,
       max_tokens: 200,
@@ -106,7 +106,7 @@ export const sendChatsToUser = async (req: Request, res: Response, next: NextFun
       return res.status(401).send("Permission Didn't match");
     }
 
-    return res.status(200).json({ message: "OK", chats: user.chats });
+    return res.status(200).json({ message: "OK", conversations: user.conversations });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "ERROR", cause: error.message });
