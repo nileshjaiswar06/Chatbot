@@ -1,9 +1,7 @@
 import express from 'express';
 import { Configuration, OpenAIApi } from 'openai';
 import { config } from 'dotenv';
-
 config();
-
 const router = express.Router();
 const openai = new OpenAIApi(new Configuration({ apiKey: process.env.OPEN_AI_SECRET }));
 router.post('/generate', async (req, res) => {

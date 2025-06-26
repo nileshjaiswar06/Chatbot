@@ -263,7 +263,7 @@ const Chat = () => {
             fontWeight: "600",
           }}
         >
-          Model - 3.5 TURBO
+          Model - 4
         </Typography>
 
         <Box
