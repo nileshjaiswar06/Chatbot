@@ -11,7 +11,6 @@ const openai = new OpenAIApi(
 );
 
 router.post('/generate', async (req, res) => {
-  console.log("Image generate endpoint hit!");
   const { prompt } = req.body;
   try {
     const response = await openai.createImage({
